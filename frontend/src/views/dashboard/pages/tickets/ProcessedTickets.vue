@@ -28,6 +28,18 @@ export default {
           sortable: false,
           value: "title",
         },
+        {
+          text: "Kontrahent",
+          sortable: false,
+          value: "contractor",
+        },
+        { text: "Numer", value: "number", sortable: false },
+        {
+          text: "Od",
+          sortable: false,
+          value: "emails[0].from",
+        },
+        { text: "Actions", value: "actions", sortable: false, align: "end" },
       ],
       title: "Przetważane zgłoszenia",
     },

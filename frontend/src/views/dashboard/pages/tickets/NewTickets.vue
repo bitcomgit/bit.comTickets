@@ -2,7 +2,11 @@
   <forwarded-table
     :items="tickets"
     :tableconfig="ticketActiveTableConfig"
-  ></forwarded-table>
+  >
+    <template v-slot:tableactions="props">
+      <v-icon small class="mr-2" @click="editItem(props.item)"> mdi-pencil </v-icon>
+    </template>
+  </forwarded-table>
 </template>
 
 <script>
@@ -28,10 +32,27 @@ export default {
           sortable: false,
           value: "title",
         },
+        {
+          text: "Kontrahent",
+          sortable: false,
+          value: "contractor",
+        },
+        { text: "Numer", value: "number", sortable: false },
+        {
+          text: "Od",
+          sortable: false,
+          value: "emails[0].from",
+        },
+        { text: "Actions", value: "actions", sortable: false, align: "end" },
       ],
       title: "Nowe zgłoszenia",
     },
   }),
+  methods: {
+    editItem(x) {
+      console.log(x)
+    },
+  },
 };
 </script>
 

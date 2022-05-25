@@ -48,6 +48,14 @@ const routes = [
             /* webpackChunkName: "dashboard/users" */ "../views/dashboard/pages/users/Users"
           ),
       },
+      {
+        name: "ticketView",
+        path: "pages/tickets/:id",
+        component: () =>
+          import(
+            /* webpackChunkName: "dashboard/users" */ "@/views/dashboard/pages/tickets/TicketView"
+            ),
+      },
 
     ],
   },
