@@ -52,8 +52,8 @@ namespace bitcomTickets.Data
 
             _context.Tickets.Add(ticket);
             _context.SaveChanges();
-
-            _exchange.CreateLocalCache(exchangeMail);
+            //TODO: do some thing
+            //_exchange.CreateLocalCache(exchangeMail);
 
             return ticket;
         }
@@ -84,6 +84,9 @@ namespace bitcomTickets.Data
             return result;
         }
 
-      
+        public bool IsEmail(string internetMessageId)
+        {
+            return _context.Emails.Any(e => e.InternetMessageId == internetMessageId);
+        }
     }
 }

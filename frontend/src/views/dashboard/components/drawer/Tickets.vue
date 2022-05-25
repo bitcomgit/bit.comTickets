@@ -3,11 +3,17 @@
     <template v-slot:activator>
       <v-list-item-title>Zgłoszenia</v-list-item-title>
     </template>
-    <v-list-item link :to="{ name: 'activetickets' }">
-      <v-list-item-title v-text="activeText"></v-list-item-title>
+    <v-list-item link :to="{ name: 'processedtickets' }">
+      <v-list-item-title v-text="processedText"></v-list-item-title>
+    </v-list-item>
+    <v-list-item link :to="{ name: 'forwardedtickets' }">
+      <v-list-item-title v-text="forwardedText"></v-list-item-title>
+    </v-list-item>
+    <v-list-item link :to="{ name: 'newtickets' }">
+      <v-list-item-title v-text="newText"></v-list-item-title>
     </v-list-item>
   </v-list-group>
-</template>2
+</template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
@@ -21,10 +27,22 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      countActive: "tickets/getNumberOfActiveTickets",
+      user: "app/currentUser",
+      processed: "tickets/getNumberOfProcessedTickets",
+      forwarded: "tickets/getNumberOfForwardedTickets",
+      new: "tickets/getNumberOfNewTickets"
     }),
-    activeText() {
-      return `Aktywne (${this.countActive})`;
+    processedText() {
+      let txt = this.processed(this.user.username) > 0 ? `(${this.processed(this.user.username)})`:"";
+      return `Przetwarzane ${txt} `;
+    },
+    forwardedText() {
+      let txt = this.forwarded(this.user.username) > 0 ? `(${this.forwarded(this.user.username)})`:"";
+      return `Przekazane ${txt}`;
+    },
+    newText() {
+      let txt = this.new > 0 ? `(${this.new})`:"";
+      return `Nowe ${txt}`;
     },
   },
   methods: {
@@ -34,9 +52,7 @@ export default {
   },
   created() {
     this.hubConnection = new HubConnectionBuilder().withUrl("/ticket").build();
-    this.hubConnection.start().then(() => {
-      console.log("ticket connected");
-    });
+    this.hubConnection.start().then(() => {});
     this.hubConnection.on("newTicket", (data) => {
       this.addTicket(data);
     });

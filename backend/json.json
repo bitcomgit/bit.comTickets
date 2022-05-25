@@ -1,0 +1,102 @@
+[
+  {
+    "id": 85,
+    "title": "Fwd: Auto-Wanda",
+    "description": null,
+    "createdAt": "2022-05-24T08:52:19.306854",
+    "closedAt": "0001-01-01T00:00:00",
+    "state": 0,
+    "contractor": null,
+    "number": "ZG/2022/5/1",
+    "contractorNumber": null,
+    "owner": {
+      "id": 2,
+      "username": "michal",
+      "lastname": "Braniecki",
+      "firstname": "Micha≥",
+      "email": "michal@bitcom.com.pl",
+      "phonenumber": null,
+      "roles": [ "employee" ]
+    },
+    "executor": {
+      "id": 2,
+      "username": "michal",
+      "lastname": "Braniecki",
+      "firstname": "Micha≥",
+      "email": "michal@bitcom.com.pl",
+      "phonenumber": null,
+      "roles": [ "employee" ]
+    },
+    "emails": [
+      {
+        "id": 85,
+        "from": "marian@autowanda.pl"
+      }
+    ],
+    "orders": null
+  },
+  {
+    "id": 86,
+    "title": "Juø jest! Nowy widok detali firmy - sprawdü najnowsze zmiany w SaldeoSMART",
+    "description": null,
+    "createdAt": "2022-05-24T08:52:53.9859297",
+    "closedAt": "0001-01-01T00:00:00",
+    "state": 0,
+    "contractor": null,
+    "number": "ZG/2022/5/2",
+    "contractorNumber": null,
+    "owner": {
+      "id": 2,
+      "username": "michal",
+      "lastname": "Braniecki",
+      "firstname": "Micha≥",
+      "email": "michal@bitcom.com.pl",
+      "phonenumber": null,
+      "roles": [ "employee" ]
+    },
+    "executor": {
+      "id": 2,
+      "username": "michal",
+      "lastname": "Braniecki",
+      "firstname": "Micha≥",
+      "email": "michal@bitcom.com.pl",
+      "phonenumber": null,
+      "roles": [ "employee" ]
+    },
+    "emails": [
+      {
+        "id": 86,
+        "from": "aktualizacje@saldeosmart.pl"
+      }
+    ],
+    "orders": null
+  },
+  {
+    "id": 87,
+    "title": "RE: dodatek",
+    "description": null,
+    "createdAt": "2022-05-24T08:53:14.2732717",
+    "closedAt": "0001-01-01T00:00:00",
+    "state": 0,
+    "contractor": null,
+    "number": "ZG/2022/5/3",
+    "contractorNumber": null,
+    "owner": {
+      "id": 2,
+      "username": "michal",
+      "lastname": "Braniecki",
+      "firstname": "Micha≥",
+      "email": "michal@bitcom.com.pl",
+      "phonenumber": null,
+      "roles": [ "employee" ]
+    },
+    "executor": null,
+    "emails": [
+      {
+        "id": 87,
+        "from": "e.polewczak@mg-central.pl"
+      }
+    ],
+    "orders": null
+  }
+]

@@ -18,14 +18,14 @@ namespace bitcomTickets.Controllers.Api
     public class TicketsExchangeController : ControllerBase
     {
 
-
-
-        public TicketsExchangeController(ITicketsEmailsRepository emailRepository, IHubContext<TicketHub> ticketHub)
+        public TicketsExchangeController(ITicketsEmailsRepository emailRepository, IHubContext<TicketHub> ticketHub, ApplicationDbContext context)
         {
             _emailRepository = emailRepository;
             _ticketHub = ticketHub;
-        }
+            _context = context;
 
+        }
+        private ApplicationDbContext _context;
         private ITicketsEmailsRepository _emailRepository;
         private IHubContext<TicketHub> _ticketHub;
 
@@ -36,7 +36,8 @@ namespace bitcomTickets.Controllers.Api
             var ticket = _emailRepository.AddNewTicketByMail(emailHelper,HttpContext);
             var owner = ticket.Owner.Id.ToString();
             var executor = ticket?.Executor?.Id.ToString();
-            var users = new string[] { owner, executor }.ToList().Distinct().ToList();
+            string[] users = new string[] { owner, executor };
+
             _ticketHub.Clients.Users(users).SendAsync("newTicket", ticket);
             return Ok();
         }
@@ -47,6 +48,14 @@ namespace bitcomTickets.Controllers.Api
         public ExchangeConnectionStatus GetConnectionStatus() 
         {
             return _emailRepository.GetExchangeStatus();
+        }
+
+        [HttpPost]
+        [Route("checkemail")]
+        [Authorize(Roles = "employee")]
+        public bool IsEmailInSystem(TicketEmailHelper helper)
+        {
+            return _emailRepository.IsEmail(helper.InternetMessageId);
         }
 
     }

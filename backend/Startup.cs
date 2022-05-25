@@ -118,7 +118,7 @@ namespace bitcomTickets
             {
                 if (env.IsDevelopment())
                 {
-                   builder.UseProxyToSpaDevelopmentServer("http://localhost:8888");
+                    builder.UseProxyToSpaDevelopmentServer("http://localhost:8888");
                 }
             });
         }

@@ -10,13 +10,13 @@ namespace bitcomTickets.Hubs
 {
     public class TicketHub : Hub
     {
-        //[Authorize(Roles = "employee")]
-        //public async Task SendMessage(Ticket ticket)
-        //{
-        //    var owner = ticket.Owner.Id.ToString();
-        //    var executor = ticket?.Executor.Id.ToString();
-        //    var users = new string[] { owner, executor }.ToList().Distinct().ToList();
-        //    await Clients.Users(users).SendAsync("newTicket",ticket);
-        //}
+        [Authorize(Roles = "employee")]
+        public async Task NewTicket(Ticket ticket)
+        {
+            var owner = ticket.Owner.Id.ToString();
+            var executor = ticket?.Executor.Id.ToString();
+            var users = new string[] { owner, executor }.ToList().Distinct().ToList();
+            await Clients.Users(users).SendAsync("newTicket", ticket);
+        }
     }
 }

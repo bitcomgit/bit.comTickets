@@ -12,15 +12,44 @@ export default {
     getActiveTickets(state) {
       return state.activeTickets;
     },
+    getProcessedTickets: (state) => (username) => {
+      return state.activeTickets
+        .filter((t) => t.executor !== null)
+        .filter((t) => t.executor.username == username);
+    },
+    getForwardedTickets: (state) => (username) => {
+      return state.activeTickets
+        .filter((t) => t.owner.username == username)
+        .filter((t) => t.executor !== null)
+        .filter((t) => t.executor.username !== username);
+    },
+    getNewTickets: (state)  => {
+      return state.activeTickets
+        .filter((t) => t.executor == null);
+    },
     getNumberOfActiveTickets(state) {
       return state.activeTickets.length;
     },
-    getNumberOfExecutingTickets: (state) => (username) => {
-    return state.activeTickets.filter( t => t.executor !== null  ).filter( t => t.executor.username == username).length;
+    getNumberOfProcessedTickets: (state) => (username) => {
+      return state.activeTickets
+        .filter((t) => t.executor !== null)
+        .filter((t) => t.executor.username == username).length;
     },
-    getActiveTicketById: (state) => (id) => {
-      return state.activeTickets.find((t) => t.id === id)
+    getNumberOfForwardedTickets: (state) => (username) => {
+      return state.activeTickets
+        .filter((t) => t.owner.username == username)
+        .filter((t) => t.executor !== null)
+        .filter((t) => t.executor.username !== username)
+        .length;
     },
+    getNumberOfNewTickets: (state)  => {
+      return state.activeTickets
+        .filter((t) => t.executor == null)
+        .length;
+    },
+    // getActiveTicketById: (state) => (id) => {
+    //   return state.activeTickets.find((t) => t.id === id)
+    // },
   },
   actions: {
     fetchTickets({ commit }) {
@@ -28,10 +57,10 @@ export default {
         commit("setTickets", response.data);
       });
     },
-    addTicket({commit}, ticket){
+    addTicket({ commit }, ticket) {
       commit("addTicket", ticket);
     },
-    closeTicket({commit},ticket){
+    closeTicket({ commit }, ticket) {
       return new Promise((resolve) => {
         ticketsApi.updateTicket(ticket).then((response) => {
           commit("removeFromActive", response.data);
@@ -44,7 +73,7 @@ export default {
         commit("setActiveTickets", response.data);
       });
     },
-    updateTicket({ commit } , ticket) {
+    updateTicket({ commit }, ticket) {
       return new Promise((resolve) => {
         ticketsApi.updateTicket(ticket).then((response) => {
           commit("updateTicket", response.data);
@@ -57,7 +86,7 @@ export default {
     },
   },
   mutations: {
-    addTicket(state, ticket){
+    addTicket(state, ticket) {
       state.activeTickets.push(ticket);
     },
     setTickets(state, tickets) {
@@ -67,11 +96,11 @@ export default {
       state.activeTickets = tickets;
     },
     updateTicket(state, ticket) {
-      let idx = state.activeTickets.findIndex( t => t.id === ticket.id);
+      let idx = state.activeTickets.findIndex((t) => t.id === ticket.id);
       state.activeTickets[idx] = ticket;
     },
-    removeFromActive(state,ticket){
-      const i = state.activeTickets.map(item => item.id).indexOf(ticket.id);
+    removeFromActive(state, ticket) {
+      const i = state.activeTickets.map((item) => item.id).indexOf(ticket.id);
       state.activeTickets.splice(i, 1);
     },
     setDefaults(state) {

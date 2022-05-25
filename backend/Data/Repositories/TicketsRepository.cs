@@ -34,7 +34,9 @@ namespace bitcomTickets.Data
             var username = httpContext.User.Identity.Name;
              return _context.Tickets
                     .Include(t => t.Emails)
-                    .Where(t => (t.Executor.UserName == username | t.Owner.UserName == username ) && t.State != TicketState.Closed)
+                    .Include(t => t.Owner)
+                    .Include(t => t.Executor)
+                    .Where(t => (t.Executor == null | t.Owner.UserName == username  | t.Executor.UserName == username) && t.State != TicketState.Closed)
                     .ToList();
 
         }

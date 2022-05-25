@@ -9,5 +9,6 @@ namespace bitcomTickets.Data
     {
         public string InternetMessageId { get; set; }
         public int UserId { get; set; }
+       
     }
 }

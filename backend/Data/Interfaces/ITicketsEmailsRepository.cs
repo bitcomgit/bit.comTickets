@@ -10,6 +10,7 @@ namespace bitcomTickets.Data
     public interface ITicketsEmailsRepository
     {
         public Ticket AddNewTicketByMail(TicketEmailHelper emailHelper, HttpContext httpContext);
+        public bool IsEmail(string internetMessageId);
         public List<EmailInfo> GetEmailsInfos(int id);
         public ExchangeConnectionStatus GetExchangeStatus();
     }

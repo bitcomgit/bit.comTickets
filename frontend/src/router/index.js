@@ -17,12 +17,28 @@ const routes = [
 
     children: [
       {
-        name: "activetickets",
-        path: "pages/activetickets",
+        name: "processedtickets",
+        path: "pages/processedtickets",
         component: () =>
           import(
-            /* webpackChunkName: "dashboard/users" */ "../views/dashboard/pages/tickets/ActiveTickets"
+            /* webpackChunkName: "dashboard/users" */ "../views/dashboard/pages/tickets/ProcessedTickets"
           ),
+      },
+      {
+        name: "forwardedtickets",
+        path: "pages/forwardedtickets",
+        component: () =>
+          import(
+            /* webpackChunkName: "dashboard/users" */ "../views/dashboard/pages/tickets/ForwardedTickets"
+            ),
+      },
+      {
+        name: "newtickets",
+        path: "pages/newdtickets",
+        component: () =>
+          import(
+            /* webpackChunkName: "dashboard/users" */ "../views/dashboard/pages/tickets/NewTickets"
+            ),
       },
       {
         name: "users",
